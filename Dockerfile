@@ -4,7 +4,7 @@ FROM python:3.10-slim
 # Install wkhtmltopdf dependencies
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
-    libjpeg-dev zlib1g-dev libxext-dev libfontconfig1 libxrender1 xfonts-base xfonts-75dpi \
+    libjpeg-dev zlib1g-dev libxext-dev libfontconfig1 libxrender1 xfonts-base xfonts-75dpi wget \
     && rm -rf /var/lib/apt/lists/*
 
 # Install wkhtmltopdf itself
