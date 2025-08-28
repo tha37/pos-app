@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2 class="text-mint-green">Dashboard</h2>
+<hr>
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="p-3 bg-light-mint rounded shadow-sm">
+            <h5>Today's Sales</h5>
+            <h3>{{ today_sales | round(2) }} MMK</h3>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="p-3 bg-light-mint rounded shadow-sm">
+            <h5>Top Selling Item</h5>
+            <h3>{% if top_item %}{{ top_item[0] }} ({{ top_item[1] }}){% else %}N/A{% endif %}</h3>
+        </div>
+    </div>
+</div>
+
+{% if low_stock_items %}
+<div class="alert alert-warning">
+    <h4 class="alert-heading">Low Stock Alert!</h4>
+    <p>The following items are running low:</p>
+    <ul class="list-unstyled">
+        {% for item in low_stock_items %}
+        <li><strong>{{ item.name }}</strong>: {{ item.quantity }} left</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<h3 class="mt-4">Your Inventory</h3>
+<div class="row">
+    {% for item in items %}
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">Price: {{ item.unit_price | round(2) }} MMK</p>
+                <p class="card-text">Stock: <span class="fw-bold {% if item.quantity <= 10 %}text-danger{% endif %}">{{
+                        item.quantity }}</span></p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

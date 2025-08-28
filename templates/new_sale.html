@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">New Sale</h2>
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    <div class="mb-3">
+                        {{ form.item_name.label(class="form-label") }}
+                        <input type="text" name="item_name" class="form-control" list="item_list" required>
+                        <datalist id="item_list">
+                            {% for item in items %}
+                            <option value="{{ item.name }}">{{ item.name }} ({{ item.quantity }} in stock)</option>
+                            {% endfor %}
+                        </datalist>
+                        <small class="text-muted">Type to see available items.</small>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.quantity.label(class="form-label") }}
+                        {{ form.quantity(class="form-control") }}
+                    </div>
+                    <div class="d-grid gap-2">
+                        {{ form.submit(class="btn btn-mint-green") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

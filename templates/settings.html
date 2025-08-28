@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm p-4">
+                <h2 class="text-center mb-4">Settings</h2>
+                <h5 class="text-center mb-3">Upload Shop Logo</h5>
+                {% if user.logo_url %}
+                <div class="text-center mb-3">
+                    <img src="{{ user.logo_url }}" class="img-fluid rounded-circle" style="max-height: 150px;">
+                </div>
+                {% endif %}
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="file" class="form-label">Choose Logo File</label>
+                        <input type="file" name="file" class="form-control" id="file" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-mint-green">Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
